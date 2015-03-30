@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<role>
+    <identifier>Everybody</identifier>
+    <role>
+        <identifier>Garage</identifier>
+    </role>
+    <role>
+        <identifier>Insurance</identifier>
+        <role>
+            <identifier>Agency</identifier>
+        </role>
+        <role>
+            <identifier>Central</identifier>
+        </role>
+        <role>
+            <identifier>Direction</identifier>
+        </role>
+    </role>
+    <role>
+        <identifier>SCA</identifier>
+    </role>
+</role>
