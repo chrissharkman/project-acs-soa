@@ -1,33 +1,61 @@
+DROP TABLE certificates;
+DROP TABLE vehicules;
+DROP TABLE vehiculeTypes;
+DROP TABLE constances;
+DROP TABLE customers;
+DROP TABLE status;
+
+CREATE TABLE vehiculeTypes (
+
+    category VARCHAR (100) NOT NULL PRIMARY KEY
+
+);
+CREATE TABLE status
+(
+    mode VARCHAR(100) NOT NULL PRIMARY KEY
+ );
+
+CREATE TABLE constances
+(
+    ID INTEGER NOT NULL  PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    keyValue INTEGER NOT NULL,
+    description VARCHAR(200)
+ 
+);
+
 CREATE TABLE customers
 (
     ID INTEGER NOT NULL PRIMARY KEY GENERATED   ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    
-lastname VARCHAR(100)
+    lastname VARCHAR(100)
   
 );
+CREATE TABLE vehicules
+(
+    ID INTEGER NOT NULL PRIMARY KEY GENERATED   ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    vehiculeTypeID VARCHAR(100),
+    modele VARCHAR(100),
+    amount DOUBLE NOT NULL,
+    CONSTRAINT fk_vhcTypeId FOREIGN KEY (vehiculeTypeID) REFERENCES vehiculeTypes (category) 
+
+ );
+
 CREATE TABLE certificates
 (
     ID INTEGER NOT NULL  PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     customerId INTEGER NOT NULL,
     vehiculeId INTEGER NOT NULL,
-    amount DOUBLE NOT NULL,
-    status ENUM('x-small', 'small', 'medium', 'large', 'x-large'),
+    status VARCHAR(100),
     createdDate DATE,
-    comment VARCHAR(400)
+    comment VARCHAR(400),
+    CONSTRAINT fk_status FOREIGN KEY (status) REFERENCES status(mode),
+    CONSTRAINT fk_customer FOREIGN KEY (customerId) REFERENCES customers(ID) ON DELETE CASCADE,
+    CONSTRAINT fk_vhcId FOREIGN KEY (vehiculeId) REFERENCES vehicules(ID) ON DELETE CASCADE 
+
 );
 
-ALTER TABLE certificates
-ADD  FOREIGN KEY (customerId) REFERENCES customers(ID) ;
 
-ALTER TABLE certificates
-ADD  FOREIGN KEY (vehiculeId) REFERENCES vehicules(ID) ;
 
-CREATE TABLE vehicules
-(
-    ID INTEGER NOT NULL PRIMARY KEY GENERATED   ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    vehiculeType VARCHAR(100),
-    modele VARCHAR(100)
- );
+
 
 
 
