@@ -44,3 +44,6 @@ CREATE TABLE issues (
     CONSTRAINT fk_customer FOREIGN KEY (customerId) REFERENCES customers(id) ON DELETE CASCADE,
     CONSTRAINT fk_vhcId FOREIGN KEY (vehicleIdentificationNumber) REFERENCES vehicles(identificationNumber) ON DELETE CASCADE
 );
+
+/* ADD MODEL DATA */
+

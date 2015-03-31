@@ -54,6 +54,7 @@ CREATE TABLE certificates
     CONSTRAINT fk_vhcId FOREIGN KEY (vehicleIdentificationNumber) REFERENCES vehicles(identificationNumber) ON DELETE CASCADE 
 );
 
+/* ADD MODEL DATA */
 
 
 INSERT INTO vehicleTypes 
