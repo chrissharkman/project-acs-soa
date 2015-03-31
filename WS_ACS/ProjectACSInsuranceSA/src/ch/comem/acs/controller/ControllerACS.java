@@ -5,6 +5,9 @@
  */
 package ch.comem.acs.controller;
 
+import ch.comem.acs.model.Status;
+import java.util.ResourceBundle;
+
 /**
  * The manager/controller class of the application service ACS.
  * @author christian heimann
@@ -24,5 +27,13 @@ public class ControllerACS {
     }
     
      
+    
+    /* PRIVATE METHODS */
+    
+    private static ResourceBundle propertiesLoader() {
+        String dataPath = "ch.comem.acs.config.database";
+        ResourceBundle prop = ResourceBundle.getBundle(dataPath);
+        return prop;
+    }
     
 }

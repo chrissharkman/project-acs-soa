@@ -57,6 +57,83 @@ public class Certificate {
         this.status = status;
         this.comment = comment;
     }
+
+    /**
+     * Getter of the id of the certificate.
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Setter to set the id of a certificate.
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Getter of the customer's id attributed to the certificate.
+     * @return the customer's id whose certificate it is.
+     */
+    public int getCustomerId() {
+        return customer.getId();
+    }
+
+    /**
+     * Getter of the vehicle identification number attributed to the certificate.
+     * @return the vehicle identification number.
+     */
+    public String getVehicleVin() {
+        return vehicle.getVin();
+    }
+
+    /**
+     * Setter to set a new vehicle to the certificate.
+     * @param vehicle the vehicle to set
+     */
+    public void setVehicle(Vehicle vehicle) {
+        if (vehicle != null) {
+            this.vehicle = vehicle;            
+        }
+    }
+
+    /**
+     * Getter to get the status' mode name.
+     * @return the status mode name.
+     */
+    public String getStatus() {
+        return status.getMode();
+    }
+
+    /**
+     * Setter to set a new status to the certificate.
+     * @param status the status to set.
+     */
+    public void setStatus(Status status) {
+        if (status != null) {
+            this.status = status;
+        }    
+    }
+
+    /**
+     * Getter to get the comment of the certificate.
+     * @return the comment
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * Setter to set a new or modified comment to the certificate.
+     * This setter replaces any existing comment.
+     * @param comment the comment to set.
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
     
     
 }
