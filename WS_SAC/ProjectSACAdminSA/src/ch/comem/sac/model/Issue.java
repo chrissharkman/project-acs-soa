@@ -2,24 +2,11 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-
-CREATE TABLE issues (
-    id INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    numberPlate VARCHAR (50),
-    vehicleIdentificationNumber VARCHAR(17) NOT NULL,
-    customerId INTEGER NOT NULL,
-    status VARCHAR(100),
-    comment VARCHAR(400),
-    createdDate DATE, 
-    handOut DATE DEFAULT NULL,
-    closeIssueDate DATE DEFAULT NULL,
-    CONSTRAINT fk_customer FOREIGN KEY (customerId) REFERENCES customers(id) ON DELETE CASCADE,
-    CONSTRAINT fk_vhcId FOREIGN KEY (vehicleIdentificationNumber) REFERENCES vehicles(identificationNumber) ON DELETE CASCADE
-);
  */
 
-package ch.comeme.sac.model;
+package ch.comem.sac.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -33,11 +20,11 @@ public class Issue {
     private Vehicle vehicle;
     private String status;
     private String comment;
-    private Date createdDate;
-    private Date handOut;
-    private Date closeIssueDate;    
+    private Timestamp createdDate;
+    private Timestamp handOut;
+    private Timestamp closeIssueDate;    
 
-    public Issue(int id, String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, Date createdDate, Date handOut, Date closeIssueDate) {
+    public Issue(int id, String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, Timestamp createdDate, Timestamp handOut, Timestamp closeIssueDate) {
       if (id <= 0 || customer == null || vehicle == null || status ==  null || comment == null || createdDate == null) throw new RuntimeException("Article invalide");
         this.id = id;
         this.numberPlate = numberPlate;
@@ -50,7 +37,7 @@ public class Issue {
         this.closeIssueDate = closeIssueDate;
     }
     
-     public Issue(String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, Date createdDate, Date handOut, Date closeIssueDate) {
+     public Issue(String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, Timestamp createdDate, Timestamp handOut, Timestamp closeIssueDate) {
       if (customer == null || vehicle == null || status ==  null || comment == null || createdDate == null) throw new RuntimeException("Article invalide");
         this.id = -1;
         this.numberPlate = numberPlate;
@@ -95,7 +82,8 @@ public class Issue {
      * @return the customer
      */
     public Customer getCustomer() {
-        return customer;
+        Customer c = new Customer(this.customer.getId(),this.customer.getLastname());
+        return c;
     }
 
     /**
@@ -109,7 +97,8 @@ public class Issue {
      * @return the vehicle
      */
     public Vehicle getVehicle() {
-        return vehicle;
+        Vehicle v = new Vehicle(this.vehicle.getIdentificationNumber(),this.comment,this.status);
+        return v;
     }
 
     /**
@@ -157,7 +146,7 @@ public class Issue {
     /**
      * @param createdDate the createdDate to set
      */
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -171,7 +160,7 @@ public class Issue {
     /**
      * @param handOut the handOut to set
      */
-    public void setHandOut(Date handOut) {
+    public void setHandOut(Timestamp handOut) {
         this.handOut = handOut;
     }
 
@@ -185,7 +174,7 @@ public class Issue {
     /**
      * @param closeIssueDate the closeIssueDate to set
      */
-    public void setCloseIssueDate(Date closeIssueDate) {
+    public void setCloseIssueDate(Timestamp closeIssueDate) {
         this.closeIssueDate = closeIssueDate;
     }
     
