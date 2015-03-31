@@ -6,7 +6,7 @@
 
 package ch.comem.sac.model;
 
-import com.sun.xml.internal.bind.v2.util.TypeCast;
+
 
 /**
  * 

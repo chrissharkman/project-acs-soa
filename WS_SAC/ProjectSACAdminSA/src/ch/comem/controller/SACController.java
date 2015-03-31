@@ -23,12 +23,34 @@ import java.util.ResourceBundle;
  */
 public class SACController {
 
-    public static void insertNewIssue() {
+    public static int insertNewIssue(Issue issue) {
+      
+        int issueInsert = -1;
+        Connection con = null;
+        try {
+            ResourceBundle prop = propertiesLoader();
+            con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
+            Statement statement = con.createStatement();
+                issueInsert = statement.executeUpdate("INSERT INTO issues "
+                    + "(numberPlate,vehicleIdentificationNumber,issueId,status,comment,createdDate,handOut,closeIssueDate) VALUES "
+                    + "('" + lastname + "') ");            if (issueInsert == -1) {
+                throw new RuntimeException("Customer insert error");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return issueInsert;
+        
 
     }
 
     /* CRUD METHODE */
-    public static ArrayList<Customer> getCustomers(String lastname) {
+    public static ArrayList<Customer> getCustomers() {
 
         ArrayList<Customer> customers = new ArrayList<>();
 
@@ -81,7 +103,7 @@ public class SACController {
         return customer;
     }
 
-    public static int insertCustomer(String lastname) {
+    public static int insertCustomer(Customer customer) {
 
         int customerInsert = -1;
         Connection con = null;
@@ -89,7 +111,8 @@ public class SACController {
             ResourceBundle prop = propertiesLoader();
             con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
             Statement statement = con.createStatement();
-            customerInsert = statement.executeUpdate("INSERT TO customers (lastname) VALUES ('" + lastname + "') ");
+            
+            customerInsert = statement.executeUpdate("INSERT INTO customers (lastname) VALUES ('" + customer.getLastname()+ "') ");
             if (customerInsert == -1) {
                 throw new RuntimeException("Customer insert error");
             }
@@ -112,10 +135,10 @@ public class SACController {
             ResourceBundle prop = propertiesLoader();
             con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
             Statement statement = con.createStatement();
-            ResultSet results = statement.executeQuery("SELECT * FROM vehiclesType WHERE category = '" + category + "'");
+            ResultSet results = statement.executeQuery("SELECT * FROM vehicleTypes WHERE category = '" + category + "'");
             if (results.next()) {
                 vehicleType = new VehicleType(
-                        results.getString("categorie"));
+                        results.getString("category"));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -129,7 +152,7 @@ public class SACController {
         return vehicleType;
     }
 
-    public static int insertVehicleType(String category) {
+    public static int insertVehicleType(VehicleType vehicleType) {
 
         int vehicleTyperInsert = -1;
         Connection con = null;
@@ -137,7 +160,7 @@ public class SACController {
             ResourceBundle prop = propertiesLoader();
             con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
             Statement statement = con.createStatement();
-            vehicleTyperInsert = statement.executeUpdate("INSERT TO VehicleType (categorie) VALUES ('" + category + "') ");
+            vehicleTyperInsert = statement.executeUpdate("INSERT INTO VehicleTypes (category) VALUES ('" + vehicleType.getCategory()+ "') ");
             if (vehicleTyperInsert == -1) {
                 throw new RuntimeException("Customer insert error");
             }
@@ -163,7 +186,7 @@ public class SACController {
             while (results.next()) {
                 Vehicle vehicle = new Vehicle(
                         results.getString("identificationNumber"),
-                        results.getString("moedel"),
+                        results.getString("model"),
                         results.getString("typeCategory")
                 );
                 vehicles.add(vehicle);
@@ -212,13 +235,14 @@ public class SACController {
         int vehicleInsert = -1;
         Connection con = null;
         try {
+            if (getVehicleType(vehicule.getTypeCategory()) == null)throw new RuntimeException("Vehicule Type is wrong");                
             ResourceBundle prop = propertiesLoader();
             con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
             Statement statement = con.createStatement();
-            vehicleInsert = statement.executeUpdate("INSERT TO VehicleType (identificationNumber,typeCategory,model) VALUES "
+            vehicleInsert = statement.executeUpdate("INSERT INTO Vehicles (identificationNumber,typeCategory,model) VALUES "
                     + "('" + vehicule.getIdentificationNumber() + "', "
                     + "'" + vehicule.getTypeCategory() + "',"
-                    + "'" + vehicule.getTypeCategory() + "'");
+                    + "'" + vehicule.getTypeCategory() + "')");
             if (vehicleInsert == -1) {
                 throw new RuntimeException("vehicle insert error");
             }
@@ -234,9 +258,7 @@ public class SACController {
     }
 
     /**
-     * public Issue(int id, String numberPlate, Customer customer, Vehicle
-     * vehicle, String status, String comment, Date createdDate, Date handOut,
-     * Date closeIssueDate) {
+     *
      *
      * @return
      */
@@ -362,7 +384,7 @@ public class SACController {
       
     /* PRIVATE METHODE */
     private static ResourceBundle propertiesLoader() {
-        String dataPath = "ch.comem.goldeneye.config.database";
+        String dataPath = "ch.comem.sac.config.database";
         ResourceBundle prop = ResourceBundle.getBundle(dataPath);
         return prop;
     }
