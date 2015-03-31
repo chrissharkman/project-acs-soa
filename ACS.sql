@@ -56,6 +56,38 @@ CREATE TABLE certificates
 
 
 
+INSERT INTO vehicleTypes 
+  (category) 
+VALUES 
+  ('car'),('moto'),('truck');
+
+INSERT INTO status 
+  (mode) 
+VALUES 
+  ('approved'),('refused'),('requires modification'),('created');
+
+INSERT INTO constances
+  (keyValue,Description) 
+VALUES 
+  (30000,'garage competence'),(600000,'agency competence'),(900000,'central competence');
+
+INSERT INTO customers
+  (lastname) 
+VALUES 
+  ('Christian'),('Florent'),('Jolene'),('Alissa');
+
+INSERT INTO vehicles
+  (identificationNumber,typeCategory,modele,amount) 
+VALUES 
+  (111,'car','m1',15000),(222,'car','m2',50000),(333,'moto','m4',30000),
+  (444,'truck','m6',80000),(555,'truck','m8',100000);
+
+
+
+
+
+
+
 
 
 
