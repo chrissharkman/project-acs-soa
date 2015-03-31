@@ -11,4 +11,18 @@ package ch.comem.acs.controller;
  */
 public class ControllerACS {
     
+    public static void insertNewCertificate() {
+        
+    }
+    
+    public static void changeState(int certificateId, State state) {
+        
+    }
+    
+    public static void modifyCertificate() {
+    
+    }
+    
+    public static void 
+    
 }
