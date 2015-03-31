@@ -1,5 +1,7 @@
 
 import ch.comem.controller.SACController;
+import ch.comem.sac.model.Customer;
+import ch.comem.sac.model.Issue;
 import ch.comem.sac.model.Vehicle;
 
 /*
@@ -15,9 +17,11 @@ import ch.comem.sac.model.Vehicle;
 public class progTest {
     
     public static void main(String[] args) {
-        
+        Customer c1 = new Customer("Emma");
         Vehicle  v1 = new Vehicle("CH999", "m9", "motos");
-        System.out.println(SACController.insertVehicleType("scooter"));
+        Issue = new Issue(, c1, v1, null, null, null, null, null)
+      
+        SACController.insertNewIssue(null)
         
     }
 

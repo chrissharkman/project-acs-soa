@@ -37,7 +37,7 @@ public class SACController {
                 issueInsert = statement.executeUpdate("INSERT INTO issues "
                     + "(numberPlate,vehicleIdentificationNumber,issueId,status,comment,createdDate,handOut,closeIssueDate) VALUES "
                     + "('" + issue.getNumberPlate() + "','"+issue.getVehicle().getIdentificationNumber()+"',"+issue.getId()+",'"+issue.getStatus()+"'"
-                    + ",'"+issue.getComment()+"',"+issue.getCreatedDate()+","+issue.getHandOut()+","+issue.getCloseIssueDate());            
+                    + ",'"+issue.getComment()+"',CURRENT_TIMESTAMP,"+issue.getHandOut()+","+issue.getCloseIssueDate());            
                                     
                 if (issueInsert == -1) {
                 throw new RuntimeException("Customer insert error");
