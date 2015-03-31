@@ -15,7 +15,7 @@ public class ControllerACS {
         
     }
     
-    public static void changeState(int certificateId, State state) {
+    public static void changeState(int certificateId, Status status) {
         
     }
     
@@ -23,6 +23,6 @@ public class ControllerACS {
     
     }
     
-    public static void 
+     
     
 }
