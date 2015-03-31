@@ -26,8 +26,8 @@ public class Program {
         
 //        
         Certificate c = new Certificate(costumer, veh, status, "No comment.");
-        ControllerACS.insertNewCertificate(c);
-        
+        int go = ControllerACS.insertNewCertificate(c);
+        System.out.println(go);
        // System.out.println(ControllerACS.insertVehicle(veh));
     }
 }

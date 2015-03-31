@@ -37,8 +37,8 @@ CREATE TABLE issues (
     customerId INTEGER NOT NULL,
     status VARCHAR(100),
     comment VARCHAR(400),
-    createdDate DATE, 
-    handOut DATE DEFAULT NULL,
+    createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    handOut TIMESTAMP DEFAULT NULL,
     closeIssueDate DATE DEFAULT NULL,
     CONSTRAINT fk_customer FOREIGN KEY (customerId) REFERENCES customers(id) ON DELETE CASCADE,
     CONSTRAINT fk_vhcId FOREIGN KEY (vehicleIdentificationNumber) REFERENCES vehicles(identificationNumber) ON DELETE CASCADE

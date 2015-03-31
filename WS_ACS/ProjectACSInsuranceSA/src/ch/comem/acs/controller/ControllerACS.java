@@ -22,7 +22,13 @@ import java.util.ResourceBundle;
  */
 public class ControllerACS {
     
-    public static Certificate insertNewCertificate(Certificate certificate) {        
+    /**
+     * Function to insert a new certificate. The certificate needs to be complete.
+     * @param certificate the certificate object to insert.
+     * @return the generated id of the inserted certificate, -1 if insertion was not successful. 
+     */
+    public static int insertNewCertificate(Certificate certificate) {
+        int generatedKey = -1;
         // check customer and vehicleType
         if (customerExists(certificate.getCustomerId()) && vehicleTypeExists(certificate.getVehicleType())) {
             try {
@@ -30,16 +36,13 @@ public class ControllerACS {
                 int vehiculeInserted = insertVehicle(certificate.getVehicle());
                 if (vehiculeInserted >= 0) {
                     // insert Certificate into database with status 'created'
-                    int generatedKey = insertCertificate(certificate);
-                    if (generatedKey > -1) {
-                        certificate.setId(generatedKey);  
-                    }
+                    generatedKey = insertCertificate(certificate);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        return certificate;
+        return generatedKey;
     }
     
     public static void changeState(int certificateId, Status status) {
