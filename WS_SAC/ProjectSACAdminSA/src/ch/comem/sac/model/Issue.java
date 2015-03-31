@@ -2,23 +2,9 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-
-CREATE TABLE issues (
-    id INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    numberPlate VARCHAR (50),
-    vehicleIdentificationNumber VARCHAR(17) NOT NULL,
-    customerId INTEGER NOT NULL,
-    status VARCHAR(100),
-    comment VARCHAR(400),
-    createdDate DATE, 
-    handOut DATE DEFAULT NULL,
-    closeIssueDate DATE DEFAULT NULL,
-    CONSTRAINT fk_customer FOREIGN KEY (customerId) REFERENCES customers(id) ON DELETE CASCADE,
-    CONSTRAINT fk_vhcId FOREIGN KEY (vehicleIdentificationNumber) REFERENCES vehicles(identificationNumber) ON DELETE CASCADE
-);
  */
 
-package ch.comeme.sac.model;
+package ch.comem.sac.model;
 
 import java.util.Date;
 
