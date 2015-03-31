@@ -45,6 +45,15 @@ public class Vehicle {
     public String getVehicleTypeCategory() {
         return vehicleType.getCategory();
     }
+    
+    /**
+     * Getter to get a copy of the VehicleType of the vehicle.
+     * @return a VehicleType object with the category like the vehicle.
+     */
+    public VehicleType getVehicleType() {
+        VehicleType vt = new VehicleType(this.vehicleType.getCategory());
+        return vt;
+    }
 
     /**
      * Setter to set a new vehicleType.

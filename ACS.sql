@@ -47,7 +47,7 @@ CREATE TABLE certificates
     customerId INTEGER NOT NULL,
     vehicleIdentificationNumber VARCHAR(17) NOT NULL,
     status VARCHAR(100),
-    createdDate DATE,
+    createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     comment VARCHAR(400),
     CONSTRAINT fk_status FOREIGN KEY (status) REFERENCES status(mode),
     CONSTRAINT fk_customer FOREIGN KEY (customerId) REFERENCES customers(id) ON DELETE CASCADE,

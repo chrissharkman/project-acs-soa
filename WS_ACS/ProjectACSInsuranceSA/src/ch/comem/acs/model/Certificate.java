@@ -89,7 +89,15 @@ public class Certificate {
     public String getVehicleVin() {
         return vehicle.getVin();
     }
-
+        
+    /**
+     * Getter of a copy of the complete Vehicle object.
+     */
+    public Vehicle getVehicle() {
+        Vehicle v = new Vehicle(this.vehicle.getVin(), this.vehicle.getVehicleType(), this.vehicle.getModel(), this.vehicle.getAmount());
+        return v;
+    }
+    
     /**
      * Setter to set a new vehicle to the certificate.
      * @param vehicle the vehicle to set
@@ -98,6 +106,14 @@ public class Certificate {
         if (vehicle != null) {
             this.vehicle = vehicle;            
         }
+    }
+    
+    /**
+     * Getter of the vehicleType category of the indicated vehicle.
+     * @return a String with the name of the vehicle type category
+     */
+    public String getVehicleType() {
+        return vehicle.getVehicleTypeCategory();
     }
 
     /**
