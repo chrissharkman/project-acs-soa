@@ -34,7 +34,7 @@ CREATE TABLE customers
 
 CREATE TABLE vehicles
 (
-    identificationNumber INTEGER NOT NULL PRIMARY KEY,
+    identificationNumber VARCHAR(17) NOT NULL PRIMARY KEY,
     typeCategory VARCHAR(100),
     modele VARCHAR(100),
     amount DOUBLE NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE certificates
 (
     id INTEGER NOT NULL  PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     customerId INTEGER NOT NULL,
-    vehicleIdentificationNumber INTEGER NOT NULL,
+    vehicleIdentificationNumber VARCHAR(17) NOT NULL,
     status VARCHAR(100),
     createdDate DATE,
     comment VARCHAR(400),
@@ -80,8 +80,8 @@ VALUES
 INSERT INTO vehicles
   (identificationNumber,typeCategory,modele,amount) 
 VALUES 
-  (111,'car','m1',15000),(222,'car','m2',50000),(333,'moto','m4',30000),
-  (444,'truck','m6',80000),(555,'truck','m8',100000);
+  ('CH111','car','m1',15000),('CH222','car','m2',50000),('CH333','moto','m4',30000),
+  ('CH444','truck','m6',80000),('CH555','truck','m8',100000);
 
 
 
