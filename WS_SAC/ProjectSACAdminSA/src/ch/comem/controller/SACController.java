@@ -31,9 +31,15 @@ public class SACController {
             ResourceBundle prop = propertiesLoader();
             con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
             Statement statement = con.createStatement();
+            
+            issue.getVehicle().getIdentificationNumber();
+            
                 issueInsert = statement.executeUpdate("INSERT INTO issues "
                     + "(numberPlate,vehicleIdentificationNumber,issueId,status,comment,createdDate,handOut,closeIssueDate) VALUES "
-                    + "('" + lastname + "') ");            if (issueInsert == -1) {
+                    + "('" + issue.getNumberPlate() + "','"+issue.getVehicle().getIdentificationNumber()+"',"+issue.getId()+",'"+issue.getStatus()+"'"
+                    + ",'"+issue.getComment()+"',"+issue.getCreatedDate()+","+issue.getHandOut()+","+issue.getCloseIssueDate());            
+                                    
+                if (issueInsert == -1) {
                 throw new RuntimeException("Customer insert error");
             }
         } catch (Exception e) {
@@ -278,9 +284,9 @@ public class SACController {
                         getVehicle(results.getString("identificationNumber")),
                         results.getString("status"),
                         results.getString("comment"),
-                        results.getDate("createdDate"),
-                        results.getDate("handOut"),
-                        results.getDate("closeIssueDate")
+                        results.getTimestamp("createdDate"),
+                        results.getTimestamp("handOut"),
+                        results.getTimestamp("closeIssueDate")
                 );
                 issues.add(issue);
             }
@@ -312,9 +318,9 @@ public class SACController {
                         getVehicle(results.getString("identificationNumber")),
                         results.getString("status"),
                         results.getString("comment"),
-                        results.getDate("createdDate"),
-                        results.getDate("handOut"),
-                        results.getDate("closeIssueDate")
+                        results.getTimestamp("createdDate"),
+                        results.getTimestamp("handOut"),
+                        results.getTimestamp("closeIssueDate")
                 );
 
             }
