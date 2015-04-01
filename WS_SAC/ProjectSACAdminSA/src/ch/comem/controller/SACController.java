@@ -8,6 +8,7 @@ package ch.comem.controller;
 import ch.comem.acs.model.VehicleType;
 import ch.comem.sac.model.Customer;
 import ch.comem.sac.model.Issue;
+import ch.comem.sac.model.Status;
 import ch.comem.sac.model.Vehicle;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,19 +29,23 @@ public class SACController {
         int issueInsert = -1;
         Connection con = null;
         try {
+             if (getStatus(issue.getStatus()) == null)throw new RuntimeException("Status is wrong"); 
             ResourceBundle prop = propertiesLoader();
             con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
             Statement statement = con.createStatement();
-            
-            issue.getVehicle().getIdentificationNumber();
-            
+                    
                 issueInsert = statement.executeUpdate("INSERT INTO issues "
-                    + "(numberPlate,vehicleIdentificationNumber,issueId,status,comment,createdDate,handOut,closeIssueDate) VALUES "
-                    + "('" + issue.getNumberPlate() + "','"+issue.getVehicle().getIdentificationNumber()+"',"+issue.getId()+",'"+issue.getStatus()+"'"
-                    + ",'"+issue.getComment()+"',CURRENT_TIMESTAMP,"+issue.getHandOut()+","+issue.getCloseIssueDate());            
-                                    
+                    + "(numberPlate,vehicleIdentificationNumber,customerId,status,comment,createdDate,handOut,closeIssueDate) VALUES "
+                    + "('" + issue.getNumberPlate() + "','"+issue.getVehicle().getIdentificationNumber()+"',"+issue.getCustomer().getId()+",'"+issue.getStatus()+"'"
+                    + ",'"+issue.getComment()+"',CURRENT_TIMESTAMP,{ts'"+issue.getHandOut()+"'},{ts'"+issue.getHandOut()+"'})");   
+                
+                /*
+                (numberPlate,vehicleIdentificationNumber,customerId,status,comment,createdDate,handOut,closeIssueDate) VALUES 
+                    ('VD5666','CH111',1,'created','un commentaire',CURRENT_TIMESTAMP,{ts'2011-03-10 15:52:25'},{ts'2011-03-17 15:52:25'})
+                */
+                                   
                 if (issueInsert == -1) {
-                throw new RuntimeException("Customer insert error");
+                throw new RuntimeException("Issue insert error");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -95,6 +100,7 @@ public class SACController {
             ResultSet results = statement.executeQuery("SELECT * FROM customers where id =" + id);
             if (results.next()) {
                 customer = new Customer(
+                        results.getInt("id"),
                         results.getString("lastname"));
             }
         } catch (Exception e) {
@@ -156,6 +162,31 @@ public class SACController {
             System.out.println(e.getMessage());
         }
         return vehicleType;
+    }
+    
+        public static Status getStatus(String mode) {
+
+        Status status = null;
+        Connection con = null;
+        try {
+            ResourceBundle prop = propertiesLoader();
+            con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
+            Statement statement = con.createStatement();
+            ResultSet results = statement.executeQuery("SELECT * FROM status WHERE mode = '" + mode + "'");
+            if (results.next()) {
+                status = new Status(
+                        results.getString("mode"));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            status = null;
+        }
+        try {
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return status;
     }
 
     public static int insertVehicleType(VehicleType vehicleType) {
@@ -220,7 +251,7 @@ public class SACController {
             if (results.next()) {
                 vehicle = new Vehicle(
                         results.getString("identificationNumber"),
-                        results.getString("moedel"),
+                        results.getString("model"),
                         results.getString("typeCategory")
                 );
             }
@@ -281,12 +312,12 @@ public class SACController {
                         results.getInt("id"),
                         results.getString("numberPlate"),
                         getCustomer(results.getInt("customerId")),
-                        getVehicle(results.getString("identificationNumber")),
+                        getVehicle(results.getString("vehicleIdentificationNumber")),
                         results.getString("status"),
                         results.getString("comment"),
-                        results.getTimestamp("createdDate"),
-                        results.getTimestamp("handOut"),
-                        results.getTimestamp("closeIssueDate")
+                        results.getString("createdDate"),
+                        results.getString("handOut"),
+                        results.getString("closeIssueDate")
                 );
                 issues.add(issue);
             }
@@ -314,13 +345,13 @@ public class SACController {
                 issue = new Issue(
                         results.getInt("id"),
                         results.getString("numberPlate"),
-                        getCustomer(results.getInt("customerId")),
-                        getVehicle(results.getString("identificationNumber")),
+                        getCustomer(results.getInt("customerId")),                      
+                        getVehicle(results.getString("vehicleIdentificationNumber")),
                         results.getString("status"),
                         results.getString("comment"),
-                        results.getTimestamp("createdDate"),
-                        results.getTimestamp("handOut"),
-                        results.getTimestamp("closeIssueDate")
+                      	results.getString("createdDate"),
+                        results.getString("handOut"),
+                        results.getString("closeIssueDate")
                 );
 
             }

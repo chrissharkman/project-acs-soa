@@ -6,7 +6,7 @@
 
 package ch.comem.sac.model;
 
-import java.sql.Timestamp;
+
 import java.util.Date;
 
 /**
@@ -20,12 +20,12 @@ public class Issue {
     private Vehicle vehicle;
     private String status;
     private String comment;
-    private Timestamp createdDate;
-    private Timestamp handOut;
-    private Timestamp closeIssueDate;    
+    private String createdDate;
+    private String handOut;
+    private String closeIssueDate;    
 
-    public Issue(int id, String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, Timestamp createdDate, Timestamp handOut, Timestamp closeIssueDate) {
-      if (id <= 0 || customer == null || vehicle == null || status ==  null || comment == null || createdDate == null) throw new RuntimeException("Article invalide");
+    public Issue(int id, String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, String createdDate, String handOut, String closeIssueDate) {
+      if (id <= 0 || customer == null || vehicle == null || status ==  null || comment == null || createdDate == null) throw new RuntimeException("Issue invalide");
         this.id = id;
         this.numberPlate = numberPlate;
         this.customer = customer;
@@ -37,8 +37,8 @@ public class Issue {
         this.closeIssueDate = closeIssueDate;
     }
     
-     public Issue(String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, Timestamp createdDate, Timestamp handOut, Timestamp closeIssueDate) {
-      if (customer == null || vehicle == null || status ==  null || comment == null || createdDate == null) throw new RuntimeException("Article invalide");
+     public Issue(String numberPlate, Customer customer, Vehicle vehicle, String status, String comment,String handOut, String closeIssueDate) {
+      if (customer == null || vehicle == null || status ==  null || comment == null) throw new RuntimeException("Issue invalide");
         this.id = -1;
         this.numberPlate = numberPlate;
         this.customer = customer;
@@ -139,42 +139,42 @@ public class Issue {
     /**
      * @return the createdDate
      */
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
     /**
      * @param createdDate the createdDate to set
      */
-    public void setCreatedDate(Timestamp createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
     /**
      * @return the handOut
      */
-    public Date getHandOut() {
+    public String getHandOut() {
         return handOut;
     }
 
     /**
      * @param handOut the handOut to set
      */
-    public void setHandOut(Timestamp handOut) {
+    public void setHandOut(String handOut) {
         this.handOut = handOut;
     }
 
     /**
      * @return the closeIssueDate
      */
-    public Date getCloseIssueDate() {
+    public String getCloseIssueDate() {
         return closeIssueDate;
     }
 
     /**
      * @param closeIssueDate the closeIssueDate to set
      */
-    public void setCloseIssueDate(Timestamp closeIssueDate) {
+    public void setCloseIssueDate(String closeIssueDate) {
         this.closeIssueDate = closeIssueDate;
     }
     

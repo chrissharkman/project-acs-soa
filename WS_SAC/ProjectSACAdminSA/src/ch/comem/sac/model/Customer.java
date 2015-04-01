@@ -17,12 +17,12 @@ public class Customer {
     
         public Customer(String lastname) {
         if ( lastname == null) throw new RuntimeException("lastname invalid");
-        this.id = -1;
+        this.id = 0;
         this.lastname = lastname;
     }
 
     public Customer(int id, String lastname) {
-        if ( lastname == null || id <= 0) throw new RuntimeException("lastname invalid");
+        if ( lastname == null || id <= 0) throw new RuntimeException("lastname invalid or id");
         this.id = id;
         this.lastname = lastname;
     }
