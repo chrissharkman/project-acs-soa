@@ -3,17 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ch.comem.sac.model;
-
 
 import java.util.Date;
 
 /**
- * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * /**
+ * This class describes a issue object with all the necessary indications like
+ * id, customer, vehicle, status and comment.
+ *
+ * @author florent plomb
  */
+
+
+
 public class Issue {
+
     private int id;
     private String numberPlate;
     private Customer customer;
@@ -22,10 +27,26 @@ public class Issue {
     private String comment;
     private String createdDate;
     private String handOut;
-    private String closeIssueDate;    
+    private String closeIssueDate;
+
+    /**
+     * Constructor to create a issue belonging to a customer and a
+     * vehicule
+     * @param id an identification for issue
+     * @param numberPlate an number plate for a vehicule
+     * @param customer  The customer for whom the issue is for.
+     * @param vehicle The vehicle for whom the issue is for.
+     * @param status The status of issue
+     * @param comment The comment about issue
+     * @param createdDate Date of creation
+     * @param handOut Date when the customer handout a plate
+     * @param closeIssueDate Date if the timeout is over
+     */
 
     public Issue(int id, String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, String createdDate, String handOut, String closeIssueDate) {
-      if (id <= 0 || customer == null || vehicle == null || status ==  null || comment == null || createdDate == null) throw new RuntimeException("Issue invalide");
+        if (id <= 0 || customer == null || vehicle == null || status == null || comment == null || createdDate == null) {
+            throw new RuntimeException("Issue invalide");
+        }
         this.id = id;
         this.numberPlate = numberPlate;
         this.customer = customer;
@@ -36,9 +57,23 @@ public class Issue {
         this.handOut = handOut;
         this.closeIssueDate = closeIssueDate;
     }
-    
-     public Issue(String numberPlate, Customer customer, Vehicle vehicle, String status, String comment,String handOut, String closeIssueDate) {
-      if (customer == null || vehicle == null || status ==  null || comment == null) throw new RuntimeException("Issue invalide");
+    /**
+     * Constructor to create a issue belonging to a customer and a
+     * vehicule
+     * @param numberPlate an number plate for a vehicule
+     * @param customer  The customer for whom the issue is for.
+     * @param vehicle The vehicle for whom the issue is for.
+     * @param status The status of issue
+     * @param comment The comment about issue
+     * @param createdDate Date of creation
+     * @param handOut Date when the customer handout a plate
+     * @param closeIssueDate Date if the timeout is over
+     */
+
+    public Issue(String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, String handOut, String closeIssueDate) {
+        if (customer == null || vehicle == null || status == null || comment == null) {
+            throw new RuntimeException("Issue invalide");
+        }
         this.id = -1;
         this.numberPlate = numberPlate;
         this.customer = customer;
@@ -51,6 +86,7 @@ public class Issue {
     }
 
     /**
+     * Getter of the id of an issue
      * @return the id
      */
     public int getId() {
@@ -58,6 +94,7 @@ public class Issue {
     }
 
     /**
+     * Setter to set the id of an issue
      * @param id the id to set
      */
     public void setId(int id) {
@@ -65,6 +102,7 @@ public class Issue {
     }
 
     /**
+     * Getter of the numberplate of an issuee
      * @return the numberPlate
      */
     public String getNumberPlate() {
@@ -72,6 +110,7 @@ public class Issue {
     }
 
     /**
+     * Setter of the numberplate of an issue
      * @param numberPlate the numberPlate to set
      */
     public void setNumberPlate(String numberPlate) {
@@ -79,6 +118,7 @@ public class Issue {
     }
 
     /**
+     * Getter for a customer of a issue
      * @return the customer
      */
     public Customer getCustomer() {
@@ -87,6 +127,7 @@ public class Issue {
     }
 
     /**
+     * Setter for the customer of a issue
      * @param customer the customer to set
      */
     public void setCustomer(Customer customer) {
@@ -109,6 +150,7 @@ public class Issue {
     }
 
     /**
+     * Getter for a status of issue
      * @return the status
      */
     public String getStatus() {
@@ -116,6 +158,7 @@ public class Issue {
     }
 
     /**
+     * Setter of a status for a issue
      * @param status the status to set
      */
     public void setStatus(String status) {
@@ -123,6 +166,7 @@ public class Issue {
     }
 
     /**
+     * Getter for comment of issue
      * @return the comment
      */
     public String getComment() {
@@ -130,6 +174,7 @@ public class Issue {
     }
 
     /**
+     * Setter of comment for issue
      * @param comment the comment to set
      */
     public void setComment(String comment) {
@@ -137,6 +182,7 @@ public class Issue {
     }
 
     /**
+     * getter of createdate of an issue
      * @return the createdDate
      */
     public String getCreatedDate() {
@@ -144,6 +190,7 @@ public class Issue {
     }
 
     /**
+     * Setter of createddate of an issue
      * @param createdDate the createdDate to set
      */
     public void setCreatedDate(String createdDate) {
@@ -151,6 +198,7 @@ public class Issue {
     }
 
     /**
+     * Getter for a date handout of an issue
      * @return the handOut
      */
     public String getHandOut() {
@@ -158,6 +206,7 @@ public class Issue {
     }
 
     /**
+     * Setter for a date handout of an issue
      * @param handOut the handOut to set
      */
     public void setHandOut(String handOut) {
@@ -165,6 +214,7 @@ public class Issue {
     }
 
     /**
+     * Getter for closeDateof of an issue
      * @return the closeIssueDate
      */
     public String getCloseIssueDate() {
@@ -172,14 +222,11 @@ public class Issue {
     }
 
     /**
+     * Setter for a closeIssueDate of an issue
      * @param closeIssueDate the closeIssueDate to set
      */
     public void setCloseIssueDate(String closeIssueDate) {
         this.closeIssueDate = closeIssueDate;
     }
-    
-    
 
 }
-
-
