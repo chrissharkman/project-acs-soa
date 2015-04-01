@@ -12,7 +12,7 @@ package ch.comem.acs.model;
 
 public class Status {
     
-    private String mode ;
+    private String mode;
 
     /**
      * Constructor of status which needs a mode name which length is not gte than 100
