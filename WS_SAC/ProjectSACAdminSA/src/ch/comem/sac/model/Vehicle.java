@@ -9,13 +9,24 @@ package ch.comem.sac.model;
 
 
 /**
- * 
+ * /**
+ * This class defines the vehicle object. A vehicle object has always the standardized
+ * vehicule identification , a vehicle type, a model name.
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class Vehicle {
     private String identificationNumber;
     private String model;
     private String typeCategory;
+    
+     /**
+     * Constructor for vehicle object with a vehicle identification number, a vehicle type, a model name and an amount
+     * that indicates the value of the vehicle in CHF.
+     * @param identificationNumber the vehicle identification number.
+     * @param vehicleType the vehicle type
+     * @param model the name of the vehicle's model
+     * 
+     */
 
     public Vehicle(String identificationNumber, String model, String typeCategory) {
         if ( identificationNumber == null || model == null  || typeCategory == null) throw new RuntimeException("Vehicle invalid");
@@ -25,6 +36,7 @@ public class Vehicle {
     }
 
     /**
+     * Getter of the vehicle identification number.
      * @return the identificationNumber
      */
     public String getIdentificationNumber() {
@@ -53,14 +65,16 @@ public class Vehicle {
     }
 
     /**
+     * * Getter to get the category name of the vehicle's vehicle type.
      * @return the typeCategory
      */
     public String getTypeCategory() {
         return typeCategory;
     }
 
-    /**
-     * @param typeCategory the typeCategory to set
+   /**
+     * Setter to set a new vehicleType.
+     * @param String the vehicleType to set
      */
     public void setTypeCategory(String typeCategory) {
         this.typeCategory = typeCategory;

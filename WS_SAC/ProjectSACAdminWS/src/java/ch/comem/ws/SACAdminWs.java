@@ -32,13 +32,7 @@ import javax.ejb.Stateless;
 @Stateless()
 public class SACAdminWs {
 
-    /**
-     * This is a sample web service operation
-     */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
-    }
+
 
     @WebMethod(operationName = "insertNewIssue")
     public int insertNewIssue(@WebParam(name = "Issue") IssueTransport issueT) {
@@ -132,10 +126,10 @@ public class SACAdminWs {
 
     @WebMethod(operationName = "getStatus")
 
-    public StatusTransport getstatus(@WebParam(name = "idVehicule") String category) {
+    public StatusTransport getstatus(@WebParam(name = "idVehicule") String mode) {
 
         StatusTransport it = new StatusTransport();
-        Status i = SACController.getStatus(category);
+        Status i = SACController.getStatus(mode);
         it = Convertisseurs.statusToStatusTransport(i);
         return it;
     }
