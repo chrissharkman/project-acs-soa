@@ -5,6 +5,7 @@
  */
 package ch.comem.acs.transport;
 
+import ch.comem.acs.model.Status;
 import ch.comem.acs.model.VehicleType;
 
 /**
@@ -39,5 +40,32 @@ public class Converter {
             vtt.setCategory(vt.getCategory());
         }    
         return vtt;
+    }
+    
+    /**
+     * Function to convert StatusTrans into a Status object.
+     * @param st the StatusTrans object to convert.
+     * @return a Status object with the same mode as the delivered StatusTrans object or null if input is null.
+     */
+    public static Status statusTransToStatus(StatusTrans st) {
+        Status s = null;
+        if (st != null) {
+            s = new Status(st.getMode());
+        }
+        return s;
+    }
+    
+    /**
+     * Function to convert Status into StatusTrans object.
+     * @param s the Status object to convert.
+     * @return a StatusTrans object with the same mode as the delivered Status object or null if input is null.
+     */
+    public static StatusTrans statusToStatusTrans(Status s) {
+        StatusTrans st = null;
+        if (s != null) {
+            st = new StatusTrans();
+            st.setMode(s.getMode());
+        }
+        return st;
     }
 }
