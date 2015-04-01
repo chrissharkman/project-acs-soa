@@ -39,10 +39,7 @@ public class SACController {
                     + "('" + issue.getNumberPlate() + "','"+issue.getVehicle().getIdentificationNumber()+"',"+issue.getCustomer().getId()+",'"+issue.getStatus()+"'"
                     + ",'"+issue.getComment()+"',CURRENT_TIMESTAMP,{ts'"+issue.getHandOut()+"'},{ts'"+issue.getHandOut()+"'})");   
                 
-                /*
-                (numberPlate,vehicleIdentificationNumber,customerId,status,comment,createdDate,handOut,closeIssueDate) VALUES 
-                    ('VD5666','CH111',1,'created','un commentaire',CURRENT_TIMESTAMP,{ts'2011-03-10 15:52:25'},{ts'2011-03-17 15:52:25'})
-                */
+              
                                    
                 if (issueInsert == -1) {
                 throw new RuntimeException("Issue insert error");
@@ -74,6 +71,7 @@ public class SACController {
             ResultSet results = statement.executeQuery("SELECT * FROM customers ");
             while (results.next()) {
                 Customer customer = new Customer(
+                        results.getInt("id"),
                         results.getString("lastname"));
                 customers.add(customer);
             }
@@ -251,7 +249,7 @@ public class SACController {
             if (results.next()) {
                 vehicle = new Vehicle(
                         results.getString("identificationNumber"),
-                        results.getString("model"),
+                        results.getString("model"),                       
                         results.getString("typeCategory")
                 );
             }

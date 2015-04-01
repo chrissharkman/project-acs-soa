@@ -4,6 +4,8 @@ import ch.comem.sac.model.Customer;
 import ch.comem.sac.model.Issue;
 import ch.comem.sac.model.Vehicle;
 import java.util.ArrayList;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,21 +22,33 @@ Issue(String numberPlate, Customer customer, Vehicle vehicle, String status, Str
 public class progTest {
     
     public static void main(String[] args) {
-        Customer c1 = SACController.getCustomer(2);
-        Vehicle  v1 = new Vehicle("CH111", "m1", "car");
+//        Customer c1 = SACController.getCustomer(2);
+//        Vehicle  v1 = SACController.getVehicle("CH11");
+//        
+//        Issue i = SACController.getIssue(3);
+//        
+//        System.out.println(i.getCustomer().getId());
+//        
+//        ArrayList<Customer> a =  SACController.getCustomers();
+//        
+//        System.out.println(c1.getId());
         
-        ArrayList<Issue> a =  SACController.getIssues();
+        Vehicle v = SACController.getVehicle("CH111");
         
-        Issue i = SACController.getIssue(4);
-        
-        System.out.println(i.getCreatedDate());
         
       
+        
+        System.out.println(v.getTypeCategory());
+        
+//        for (Customer ai : a) {
+//            
+//            System.out.println("ai = " + ai.getId());
+//            
+//        }
+        
       
-     
-        
-        
-
+  
+ 
         
     }
 

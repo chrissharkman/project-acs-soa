@@ -14,8 +14,8 @@ public class IssueTransport {
     
      private int id;
     private String numberPlate;
-    private CustomerTransport customer;
-    private VehicleTransport vehicle;
+    private CustomerTransport customerTransport;
+    private VehicleTransport vehicleTransport;
     private String status;
     private String comment;
     private String createdDate;
@@ -54,7 +54,7 @@ public class IssueTransport {
      * @return the customer
      */
     public CustomerTransport getCustomer() {
-         CustomerTransport c = new CustomerTransport();
+         CustomerTransport c = this.customerTransport;
         return c;
     }
 
@@ -63,14 +63,14 @@ public class IssueTransport {
      */
     public void setCustomer(CustomerTransport customer) {
    
-        this.customer = customer;
+        this.customerTransport = customer;
     }
 
     /**
      * @return the vehicle
      */
     public VehicleTransport getVehicle() {
-         VehicleTransport v = new VehicleTransport();
+         VehicleTransport v = this.vehicleTransport;
         return v;
     }
 
@@ -78,7 +78,7 @@ public class IssueTransport {
      * @param vehicle the vehicle to set
      */
     public void setVehicle(VehicleTransport vehicle) {
-        this.vehicle = vehicle;
+        this.vehicleTransport = vehicle;
     }
 
     /**

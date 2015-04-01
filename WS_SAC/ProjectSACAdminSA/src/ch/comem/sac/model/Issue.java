@@ -82,7 +82,7 @@ public class Issue {
      * @return the customer
      */
     public Customer getCustomer() {
-        Customer c = new Customer(this.customer.getId(),this.customer.getLastname());
+        Customer c = customer;
         return c;
     }
 
@@ -97,7 +97,7 @@ public class Issue {
      * @return the vehicle
      */
     public Vehicle getVehicle() {
-        Vehicle v = new Vehicle(this.vehicle.getIdentificationNumber(),this.comment,this.status);
+        Vehicle v = vehicle;
         return v;
     }
 

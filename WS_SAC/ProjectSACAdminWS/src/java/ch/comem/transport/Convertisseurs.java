@@ -21,9 +21,9 @@ public class Convertisseurs {
     public static CustomerTransport customerToCustomerTransport(Customer customer) {
         CustomerTransport ct = null;
         if (customer != null) {
-            ct = new CustomerTransport();
-            ct.setId(customer.getId());
-            ct.setLastname(customer.getLastname());
+           ct = new CustomerTransport();          
+           ct.setId(customer.getId());
+           ct.setLastname(customer.getLastname());
         }
         return ct;
     }
