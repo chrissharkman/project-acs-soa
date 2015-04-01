@@ -365,7 +365,7 @@ public class SACController {
         return issue;
     }
 
-      public static Issue UpdatePlateIssue(int id,String numberPlate ) {
+      public static Issue updatePlateIssue(int id,String numberPlate) {
         Issue issue = null;
         Connection con = null;
         try {
@@ -378,7 +378,7 @@ public class SACController {
                     +"' WHERE id = " + id);
          
             if (IssueModified == 0)throw new RuntimeException("Issue plate number no updated");
-                           
+            issue = getIssue(id);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             issue = null;
@@ -391,7 +391,7 @@ public class SACController {
         return issue;
     }
       
-     public static Issue UpdateStatusIssue(int id,String status ) {
+     public static Issue updateStatusIssue(int id,String status ) {
         Issue issue = null;
         Connection con = null;
         try {
@@ -419,7 +419,7 @@ public class SACController {
         return issue;
     }  
      
-         public static Issue UpdateHandOutDateIssue(int id,String handout ) {
+         public static Issue updateHandOutDateIssue(int id,String handout ) {
         Issue issue = null;
         Connection con = null;
         try {
@@ -447,7 +447,7 @@ public class SACController {
         return issue;
     } 
          
-    public static Issue UpdateCloseIssueDate(int id,String closeDateIssue ) {
+    public static Issue updateCloseIssueDate(int id,String closeDateIssue ) {
         Issue issue = null;
         Connection con = null;
         try {

@@ -22,33 +22,10 @@ Issue(String numberPlate, Customer customer, Vehicle vehicle, String status, Str
 public class progTest {
     
     public static void main(String[] args) {
-        SACController.UpdateCloseIssueDate(3,"2002-04-01 08:58:09");
         
- 
-//        Customer c1 = SACController.getCustomer(2);
-//        Vehicle  v1 = SACController.getVehicle("CH11");
-//        
-//        Issue i = SACController.getIssue(3);
-//        
-//        System.out.println(i.getCustomer().getId());
-//        
-//        ArrayList<Customer> a =  SACController.getCustomers();
-//        
-//        System.out.println(c1.getId());
-        
-//        Vehicle v = SACController.getVehicle("CH111");
-//        
-//        
-//      
-//        
-//        System.out.println(v.getTypeCategory());
-        
-//        for (Customer ai : a) {
-//            
-//            System.out.println("ai = " + ai.getId());
-//            
-//        }
-        
+       
+        System.out.println(SACController.updatePlateIssue(4, "holalal")); 
+
       
   
  
