@@ -43,7 +43,7 @@ public class Issue {
      * @param closeIssueDate Date if the timeout is over
      */
 
-    public Issue(int id, String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, String createdDate, String handOut, String closeIssueDate) {
+    public Issue(int id, String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, String createdDate) {
         if (id <= 0 || customer == null || vehicle == null || status == null || comment == null || createdDate == null) {
             throw new RuntimeException("Issue invalide");
         }
@@ -54,8 +54,8 @@ public class Issue {
         this.status = status;
         this.comment = comment;
         this.createdDate = createdDate;
-        this.handOut = handOut;
-        this.closeIssueDate = closeIssueDate;
+        this.handOut = null;
+        this.closeIssueDate = null;
     }
     /**
      * Constructor to create a issue belonging to a customer and a
@@ -70,7 +70,7 @@ public class Issue {
      * @param closeIssueDate Date if the timeout is over
      */
 
-    public Issue(String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, String handOut, String closeIssueDate) {
+    public Issue(String numberPlate, Customer customer, Vehicle vehicle, String status, String comment, String createdDate) {
         if (customer == null || vehicle == null || status == null || comment == null) {
             throw new RuntimeException("Issue invalide");
         }
@@ -81,8 +81,8 @@ public class Issue {
         this.status = status;
         this.comment = comment;
         this.createdDate = createdDate;
-        this.handOut = handOut;
-        this.closeIssueDate = closeIssueDate;
+        this.handOut = null;
+        this.closeIssueDate = null;
     }
 
     /**

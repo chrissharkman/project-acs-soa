@@ -8,7 +8,7 @@ package ch.comem.transport;
 
 /**
  * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author Florent plomb
  */
 public class CustomerTransport {
       private int id;
