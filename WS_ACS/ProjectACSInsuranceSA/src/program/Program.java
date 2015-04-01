@@ -19,15 +19,20 @@ import ch.comem.acs.model.VehicleType;
 public class Program {
     
     public static void main(String[] args) {
-        Customer costumer = new Customer(8, "Christian");
+        Customer costumer = new Customer(1, "Christian");
         VehicleType vtCar = new VehicleType("car");
         Vehicle veh = new Vehicle("abcVin", vtCar, "Passat", 2300.00);
         Status status = new Status("created");
+        Status stat2 = new Status("refused");
         
 //        
-        Certificate c = new Certificate(costumer, veh, status, "No comment.");
-        int go = ControllerACS.insertNewCertificate(c);
-        System.out.println(go);
+//        Certificate c = new Certificate(costumer, veh, status, "No comment.");
+//        int go = ControllerACS.insertNewCertificate(c);
+//        System.out.println(go);
        // System.out.println(ControllerACS.insertVehicle(veh));
+      //  int ga = ControllerACS.changeState(77, stat2);
+      //  int ga = ControllerACS.changeVIN(7, "CH111");
+        int ga = ControllerACS.changeComment(7, "Highway to He'll");
+        System.out.println(ga);
     }
 }
