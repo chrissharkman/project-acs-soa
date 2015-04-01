@@ -27,7 +27,7 @@ public class ACSInsuranceWS {
     public int createCertificate(@WebParam(name = "certificate") CertificateTrans certificateT) {
         int certificateCreated = -1;
         if (certificateT != null) {
-            Certificate certificate = Converter.
+            Certificate certificate = Converter.as;
             certificateCreated = ControllerACS.insertNewCertificate(certificate);
         }
         return certificateCreated;
