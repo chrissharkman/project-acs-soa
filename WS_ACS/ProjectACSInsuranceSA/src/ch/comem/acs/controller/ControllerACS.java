@@ -97,6 +97,30 @@ public class ControllerACS {
         return changeComment;
     }
 
+    public static String getConstantKeyValue(int constantId) {
+        String keyValue = "";
+        Connection con = null;
+        try {
+            ResourceBundle prop = propertiesLoader();
+            con = getConnected(prop);
+            Statement statement = con.createStatement();
+            String query = "SELECT * FROM constances WHERE id = " + constantId + "";
+            ResultSet res = statement.executeQuery(query);
+            if (res.next()) {
+                keyValue = res.getString("keyvalue");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        // close connection
+        try {
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return keyValue;
+    }
+
     /**
      * Function to insert a vehicle into database.
      *

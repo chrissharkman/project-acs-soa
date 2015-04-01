@@ -33,7 +33,7 @@ public class Constance {
 
     /**
      * Constructor for Constance object with id, keyValue and description parameters.
-     * @param id the id of the constance, necessarily > 0. This is a purely technical identifier.
+     * @param id the id of the constance, necessarily gte than 0. This is a purely technical identifier.
      * @param keyValue the value of the constant.
      * @param description  the description of the value.
      */
