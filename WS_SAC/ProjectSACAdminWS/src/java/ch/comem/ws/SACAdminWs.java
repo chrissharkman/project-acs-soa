@@ -5,12 +5,18 @@
  */
 package ch.comem.ws;
 
+import ch.comem.acs.model.VehicleType;
 import ch.comem.controller.SACController;
 import ch.comem.sac.model.Customer;
 import ch.comem.sac.model.Issue;
+import ch.comem.sac.model.Status;
+import ch.comem.sac.model.Vehicle;
 import ch.comem.transport.Convertisseurs;
 import ch.comem.transport.CustomerTransport;
 import ch.comem.transport.IssueTransport;
+import ch.comem.transport.StatusTransport;
+import ch.comem.transport.VehicleTransport;
+import ch.comem.transport.VehicleTypeTransport;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
@@ -43,6 +49,7 @@ public class SACAdminWs {
         issueInsert = SACController.insertNewIssue(issue);        
         return issueInsert;
     }
+    
        @WebMethod(operationName = "getIssues")
     public List<IssueTransport> getIssues() {
       
@@ -82,6 +89,71 @@ public class SACAdminWs {
         Customer i = SACController.getCustomer(idiustomer);         
         it = Convertisseurs.customerToCustomerTransport(i); 
         return it;
+    }
+    
+            @WebMethod(operationName = "getVehicle")
+            
+    public VehicleTransport getVehicle(@WebParam(name = "idVehicule") String idvehicule) {
+      
+        VehicleTransport it = new VehicleTransport();
+        Vehicle i = SACController.getVehicle(idvehicule);         
+        it = Convertisseurs.vehicleToVehicleTransport(i); 
+        return it;
+    }
+   @WebMethod(operationName = "getVehicles")
+     public List<VehicleTransport> getVehicles() {
+      
+        List<VehicleTransport> listUt = new ArrayList<>();
+ 
+        List<Vehicle> listeI = SACController.getVehicles();
+        for (Vehicle i : listeI) {
+            listUt.add(Convertisseurs.vehicleToVehicleTransport(i));
+        }
+        return listUt;
+    }
+     @WebMethod(operationName = "insertNewCustomer")
+    public int insertNewCustomer(@WebParam(name = "Customer") CustomerTransport customerT) {
+        int customerInsert = -1;
+        Customer customer =  Convertisseurs.customerTransportToCustomer(customerT);          
+        customerInsert = SACController.insertCustomer(customer);        
+        return customerInsert;
+    }
+    
+             @WebMethod(operationName = "getvehicleType")
+            
+    public VehicleTypeTransport getvehicleType(@WebParam(name = "idVehicule") String category) {
+      
+        VehicleTypeTransport it = new VehicleTypeTransport();
+        VehicleType i = SACController.getVehicleType(category);         
+        it = Convertisseurs.vehicleTypeToVehicleTypeTransport(i); 
+        return it;
+    }
+    
+        @WebMethod(operationName = "getStatus")
+            
+    public StatusTransport getstatus(@WebParam(name = "idVehicule") String category) {
+      
+        StatusTransport it = new StatusTransport();
+        Status i = SACController.getStatus(category);         
+        it = Convertisseurs.statusToStatusTransport(i); 
+        return it;
+    }
+    
+        @WebMethod(operationName = "insertNewVehicleType")
+    public int insertNewVehicleType(@WebParam(name = "VehicleType") VehicleTypeTransport vt) {
+        int vehicleTypeInsert = -1;
+        VehicleType vehicleType =  Convertisseurs.vehicleTypeTransportToVehicleType(vt);          
+        vehicleTypeInsert = SACController.insertVehicleType(vehicleType);        
+        return vehicleTypeInsert;
+    }
+    
+    
+        @WebMethod(operationName = "insertNewVehicle")
+    public int insertNewVehicle(@WebParam(name = "Vehicle") VehicleTransport vt) {
+        int vehicleInsert = -1;
+        Vehicle vehicle =  Convertisseurs.vehicleTransportToVehicle(vt);          
+        vehicleInsert = SACController.insertVehicle(vehicle);        
+        return vehicleInsert;
     }
     
 }

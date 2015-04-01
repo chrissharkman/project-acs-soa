@@ -375,7 +375,7 @@ public class SACController {
             if (getIssue(id) == null) throw new RuntimeException("issue invalide");      
             int IssueModified = statement.executeUpdate("UPDATE issues "
                     + "SET numberPlate = '" + numberPlate
-                    + "WHERE id = " + id);
+                    +"' WHERE id = " + id);
          
             if (IssueModified == 0)throw new RuntimeException("Issue plate number no updated");
                            
@@ -398,13 +398,15 @@ public class SACController {
               ResourceBundle prop = propertiesLoader();
             con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
             Statement statement = con.createStatement();
-            if (getIssue(id) == null) throw new RuntimeException("issue invalide");      
+            if (getStatus(status) == null)throw new RuntimeException("Issue status no updated");
+            if (getIssue(id) == null) throw new RuntimeException("Issue invalide");      
             int IssueModified = statement.executeUpdate("UPDATE issues "
-                    + "SET satus = '" + status
-                    + "WHERE id = " + id);
+                    + "SET status = '" + status
+                    + "' WHERE id = " + id);
          
             if (IssueModified == 0)throw new RuntimeException("Issue status no updated");
-                           
+            issue = getIssue(id);
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
             issue = null;
@@ -416,6 +418,62 @@ public class SACController {
         }
         return issue;
     }  
+     
+         public static Issue UpdateHandOutDateIssue(int id,String handout ) {
+        Issue issue = null;
+        Connection con = null;
+        try {
+              ResourceBundle prop = propertiesLoader();
+            con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
+            Statement statement = con.createStatement();
+            
+            if (getIssue(id) == null) throw new RuntimeException("Issue invalide");      
+            int IssueModified = statement.executeUpdate("UPDATE issues "
+                    + "SET handout = '" + handout
+                    + "' WHERE id = " + id);
+         
+            if (IssueModified == 0)throw new RuntimeException("Issue status no updated");
+            issue = getIssue(id);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            issue = null;
+        }
+        try {
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return issue;
+    } 
+         
+    public static Issue UpdateCloseIssueDate(int id,String closeDateIssue ) {
+        Issue issue = null;
+        Connection con = null;
+        try {
+              ResourceBundle prop = propertiesLoader();
+            con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
+            Statement statement = con.createStatement();
+            
+            if (getIssue(id) == null) throw new RuntimeException("Issue invalide");      
+            int IssueModified = statement.executeUpdate("UPDATE issues "
+                    + "SET closeissueDate = '" + closeDateIssue
+                    + "' WHERE id = " + id);
+         
+            if (IssueModified == 0)throw new RuntimeException("Issue status no updated");
+            issue = getIssue(id);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            issue = null;
+        }
+        try {
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return issue;
+    } 
       
     /* PRIVATE METHODE */
     private static ResourceBundle propertiesLoader() {
