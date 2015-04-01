@@ -22,12 +22,16 @@ import javax.ejb.Stateless;
 @Stateless()
 public class ACSInsuranceWS {
 
-    
+    /**
+     * Web service operation to create a new Certificate in the database.
+     * @param certificateT the certificateTrans object, which will be saved via certificate object in the bd.
+     * @return  the generated id of the inserted certificate, -1 if insertion was not successful. 
+     */
     @WebMethod(operationName = "createCertificate")
     public int createCertificate(@WebParam(name = "certificate") CertificateTrans certificateT) {
         int certificateCreated = -1;
         if (certificateT != null) {
-            Certificate certificate = Converter.as;
+            Certificate certificate = Converter.certificateTransToCertificate(certificateT);
             certificateCreated = ControllerACS.insertNewCertificate(certificate);
         }
         return certificateCreated;
