@@ -5,7 +5,10 @@
  */
 package ch.comem.acs.transport;
 
+import ch.comem.acs.model.Certificate;
+import ch.comem.acs.model.Customer;
 import ch.comem.acs.model.Status;
+import ch.comem.acs.model.Vehicle;
 import ch.comem.acs.model.VehicleType;
 
 /**
@@ -67,5 +70,21 @@ public class Converter {
             st.setMode(s.getMode());
         }
         return st;
+    }
+    
+    /**
+     * Function to convert CertificateTrans into Certificate object.
+     * @param ct the certificateTrans object to convert.
+     * @return the Certificate object or null if input is null;
+     */
+    public static Certificate certificateTransToCertificate(CertificateTrans ct) {
+        Certificate certificate = null;
+        if (ct != null) {
+            Customer customer = Converter.customerTransToCustomer(ct.getCustomer());
+            Vehicle vehicle = Converter.vehicleTransToVehicle(ct.getVehicle());
+            Status status = Converter.statusTransToStatus(ct.getStatus());
+            certificate = new Certificate(ct.getId(),customer,vehicle,status,ct.getComment());
+        }
+        return certificate;
     }
 }
