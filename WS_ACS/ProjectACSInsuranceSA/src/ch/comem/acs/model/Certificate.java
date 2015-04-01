@@ -92,6 +92,7 @@ public class Certificate {
         
     /**
      * Getter of a copy of the complete Vehicle object.
+     * @return a vehicle object which is the copy of the complete vehicle.
      */
     public Vehicle getVehicle() {
         Vehicle v = new Vehicle(this.vehicle.getVin(), this.vehicle.getVehicleType(), this.vehicle.getModel(), this.vehicle.getAmount());

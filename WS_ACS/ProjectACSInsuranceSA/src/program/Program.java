@@ -32,7 +32,10 @@ public class Program {
        // System.out.println(ControllerACS.insertVehicle(veh));
       //  int ga = ControllerACS.changeState(77, stat2);
       //  int ga = ControllerACS.changeVIN(7, "CH111");
-        int ga = ControllerACS.changeComment(7, "Highway to He'll");
-        System.out.println(ga);
+//        int ga = ControllerACS.changeComment(7, "Highway to He'll");
+//        System.out.println(ga);
+        
+//        System.out.println(ControllerACS.getConstantKeyValue(1));
+        
     }
 }
