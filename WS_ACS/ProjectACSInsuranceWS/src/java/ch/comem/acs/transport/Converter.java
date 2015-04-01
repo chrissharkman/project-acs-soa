@@ -6,6 +6,10 @@
  */
 package ch.comem.acs.transport;
 
+import ch.comem.acs.model.Certificate;
+import ch.comem.acs.model.Customer;
+import ch.comem.acs.model.Status;
+import ch.comem.acs.model.Vehicle;
 import ch.comem.acs.model.VehicleType;
 
 /**
@@ -40,6 +44,49 @@ public class Converter {
             vtt.setCategory(vt.getCategory());
         }    
         return vtt;
+    }
+    
+    /**
+     * Function to convert StatusTrans into a Status object.
+     * @param st the StatusTrans object to convert.
+     * @return a Status object with the same mode as the delivered StatusTrans object or null if input is null.
+     */
+    public static Status statusTransToStatus(StatusTrans st) {
+        Status s = null;
+        if (st != null) {
+            s = new Status(st.getMode());
+        }
+        return s;
+    }
+    
+    /**
+     * Function to convert Status into StatusTrans object.
+     * @param s the Status object to convert.
+     * @return a StatusTrans object with the same mode as the delivered Status object or null if input is null.
+     */
+    public static StatusTrans statusToStatusTrans(Status s) {
+        StatusTrans st = null;
+        if (s != null) {
+            st = new StatusTrans();
+            st.setMode(s.getMode());
+        }
+        return st;
+    }
+    
+    /**
+     * Function to convert CertificateTrans into Certificate object.
+     * @param ct the certificateTrans object to convert.
+     * @return the Certificate object or null if input is null;
+     */
+    public static Certificate certificateTransToCertificate(CertificateTrans ct) {
+        Certificate certificate = null;
+        if (ct != null) {
+            Customer customer = Converter.customerTransToCustomer(ct.getCustomer());
+            Vehicle vehicle = Converter.vehicleTransToVehicle(ct.getVehicle());
+            Status status = Converter.statusTransToStatus(ct.getStatus());
+            certificate = new Certificate(ct.getId(),customer,vehicle,status,ct.getComment());
+        }
+        return certificate;
     }
 }
 =======

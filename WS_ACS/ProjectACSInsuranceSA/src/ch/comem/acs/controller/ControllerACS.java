@@ -6,6 +6,7 @@
 package ch.comem.acs.controller;
 
 import ch.comem.acs.model.Certificate;
+import ch.comem.acs.model.Customer;
 import ch.comem.acs.model.Status;
 import ch.comem.acs.model.Vehicle;
 import ch.comem.acs.model.VehicleType;
@@ -49,6 +50,127 @@ public class ControllerACS {
         return generatedKey;
     }
 
+    /**
+     * Function to get a complete certificate with all the internalized objects (customer, vehicle, status).
+     * @param certificateId the id of the searched certificate.
+     * @return a complete certificate object.
+     */
+    public static Certificate getCertificate(int certificateId) {
+        Certificate certificate = null;
+        Connection con = null;
+        try {
+            ResourceBundle prop = propertiesLoader();
+            con = getConnected(prop);
+            Statement statement = con.createStatement();
+            String query = "SELECT * FROM certificates WHERE id = " + certificateId + "";
+            ResultSet res = statement.executeQuery(query);
+            if (res.next()) {
+                Customer customer = getCustomer(res.getInt("customerId"));
+                Vehicle vehicle = getVehicle(res.getString("identificationNumber"));
+                Status status = getStatus(res.getString("mode"));
+                certificate = new Certificate(res.getInt("id"),customer,vehicle,status,res.getString("comment"));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        // close connection
+        try {
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return certificate;
+    }
+    
+    /**
+     * Function to return a customer object with the indicated id.
+     * @param customerId the id of the searched customer.
+     * @return a complete customer object.
+     */
+    public static Customer getCustomer(int customerId) {
+        Customer customer = null;
+        if (customerId > 0) {
+            Connection con = null;
+            try {
+                ResourceBundle prop = propertiesLoader();
+                con = getConnected(prop);
+                Statement statement = con.createStatement();
+                String query = "SELECT * FROM customers WHERE id = " + customerId + "";
+                ResultSet res = statement.executeQuery(query);
+                if (res.next()) {
+                    customer = new Customer(res.getInt("id"), res.getString("lastname"));
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            // close connection
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            } 
+        }
+        return customer;
+    }
+    
+    /**
+     * Function to return a complete vehicle object.
+     * @param identificationnumber the id of the searched vehicle.
+     * @return a vehicle if it exists in the database, null if not.
+     */
+    public static Vehicle getVehicle(String identificationnumber) {
+        Vehicle vehicle = null;
+        if (identificationnumber != null) {
+            Connection con = null;
+            try {
+                ResourceBundle prop = propertiesLoader();
+                con = getConnected(prop);
+                Statement statement = con.createStatement();
+                String query = "SELECT * FROM vehicles WHERE identificationnumber = '" + identificationnumber + "'";
+                ResultSet res = statement.executeQuery(query);
+                if (res.next()) {
+                    VehicleType vehicleType = new VehicleType(res.getString("typecategory"));
+                    vehicle = new Vehicle(res.getString("identificationnumber"), vehicleType, res.getString("model"), res.getDouble("amount"));
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            // close connection
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            } 
+        }
+        return vehicle;
+    }
+    
+    public static Status getStatus(String mode) {
+       Status status = null;
+       if (mode != null) {
+       Connection con = null;
+            try {
+                ResourceBundle prop = propertiesLoader();
+                con = getConnected(prop);
+                Statement statement = con.createStatement();
+                String query = "SELECT * FROM status WHERE mode = '" + mode + "'";
+                ResultSet res = statement.executeQuery(query);
+                if (res.next()) {
+                    status = new Status(res.getString("mode"));
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            // close connection
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }     
+       }
+       return status;
+    }
+    
     /**
      * Function to change the state of a certificate, only possible if
      * certificate and status already exist.
