@@ -23,8 +23,8 @@ public class Customer {
     
     /**
      * Constructor for customer object with an id and a lastname.
-     * @param id
-     * @param lastname 
+     * @param id the id of the customer if known. If not known, use constructor with String signature.
+     * @param lastname the lastname of the customer.
      */
     public Customer(int id, String lastname) {
         if (lastname == null || lastname.length() > 100 || id < 0) {
