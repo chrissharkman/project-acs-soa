@@ -15,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -51,7 +52,9 @@ public class ControllerACS {
     }
 
     /**
-     * Function to get a complete certificate with all the internalized objects (customer, vehicle, status).
+     * Function to get a complete certificate with all the internalized objects
+     * (customer, vehicle, status).
+     *
      * @param certificateId the id of the searched certificate.
      * @return a complete certificate object.
      */
@@ -68,7 +71,7 @@ public class ControllerACS {
                 Customer customer = getCustomer(res.getInt("customerId"));
                 Vehicle vehicle = getVehicle(res.getString("identificationNumber"));
                 Status status = getStatus(res.getString("mode"));
-                certificate = new Certificate(res.getInt("id"),customer,vehicle,status,res.getString("comment"));
+                certificate = new Certificate(res.getInt("id"), customer, vehicle, status, res.getString("comment"));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -81,9 +84,10 @@ public class ControllerACS {
         }
         return certificate;
     }
-    
+
     /**
      * Function to return a customer object with the indicated id.
+     *
      * @param customerId the id of the searched customer.
      * @return a complete customer object.
      */
@@ -108,13 +112,14 @@ public class ControllerACS {
                 con.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
-            } 
+            }
         }
         return customer;
     }
-    
+
     /**
      * Function to return a complete vehicle object.
+     *
      * @param identificationnumber the id of the searched vehicle.
      * @return a vehicle if it exists in the database, null if not.
      */
@@ -140,15 +145,53 @@ public class ControllerACS {
                 con.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
-            } 
+            }
         }
         return vehicle;
     }
-    
+
+    /**
+     * This Function get a vehicleType object.
+     *
+     * @return a vehicleType
+     */
+    public static ArrayList<VehicleType> getVehicleType() {
+
+        ArrayList<VehicleType> vts = new ArrayList<>();
+
+        Connection con = null;
+        try {
+            ResourceBundle prop = propertiesLoader();
+            con = DriverManager.getConnection(prop.getString("dbUrl"), prop.getString("dbUser"), prop.getString("dbPw"));
+            Statement statement = con.createStatement();
+            ResultSet results = statement.executeQuery("SELECT * FROM vehicleTypes");
+            while (results.next()) {
+                VehicleType vehicleType = new VehicleType(
+                        results.getString("category"));
+                vts.add(vehicleType);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            vts = null;
+        }
+        try {
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return vts;
+    }
+
+    /**
+     * This function get a specific status in DB
+     *
+     * @param mode the mode
+     * @return a status
+     */
     public static Status getStatus(String mode) {
-       Status status = null;
-       if (mode != null) {
-       Connection con = null;
+        Status status = null;
+        if (mode != null) {
+            Connection con = null;
             try {
                 ResourceBundle prop = propertiesLoader();
                 con = getConnected(prop);
@@ -166,11 +209,11 @@ public class ControllerACS {
                 con.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
-            }     
-       }
-       return status;
+            }
+        }
+        return status;
     }
-    
+
     /**
      * Function to change the state of a certificate, only possible if
      * certificate and status already exist.
@@ -183,7 +226,7 @@ public class ControllerACS {
     public static int changeState(int certificateId, Status status) {
         int changeState = -1;
         if (certificateExists(certificateId) && statusExists(status.getMode())) {
-            String query = "UPDATE certificates SET status = '" + status.getMode().replace("'", "''") + "' WHERE id = " + certificateId +"";
+            String query = "UPDATE certificates SET status = '" + status.getMode().replace("'", "''") + "' WHERE id = " + certificateId + "";
             changeState = updateCertificate(query);
         }
         return changeState;
@@ -191,6 +234,7 @@ public class ControllerACS {
 
     /**
      * Function to set the a new vehicule identification number.
+     *
      * @param certificateId the certificate to change.
      * @param vin the new vehicule identification number to set.
      * @return 1 if update was successful, -1 if error.
@@ -203,9 +247,11 @@ public class ControllerACS {
         }
         return changeVIN;
     }
-    
+
     /**
-     * FUnction to set a new comment to the certificate. The old comment is erased.
+     * FUnction to set a new comment to the certificate. The old comment is
+     * erased.
+     *
      * @param certificateId the certificate id of the certificate to change.
      * @param comment the comment to set.
      * @return 1 if update was successful, -1 if error.

@@ -8,7 +8,7 @@ package ch.comem.sac.model;
 
 /**
  * This class describes a customer with a his id (customer number) and a last name.
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author florent plomb
  */
 public class Customer {
     

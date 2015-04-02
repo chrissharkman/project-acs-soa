@@ -23,7 +23,7 @@ public class Vehicle {
      * Constructor for vehicle object with a vehicle identification number, a vehicle type, a model name and an amount
      * that indicates the value of the vehicle in CHF.
      * @param identificationNumber the vehicle identification number.
-     * @param vehicleType the vehicle type
+     * @param typeCategory the vehicle type
      * @param model the name of the vehicle's model
      * 
      */
@@ -74,7 +74,7 @@ public class Vehicle {
 
    /**
      * Setter to set a new vehicleType.
-     * @param String the vehicleType to set
+     * @param typeCategory the vehicleType to set
      */
     public void setTypeCategory(String typeCategory) {
         this.typeCategory = typeCategory;

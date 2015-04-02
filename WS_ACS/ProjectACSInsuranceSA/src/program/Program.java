@@ -11,6 +11,7 @@ import ch.comem.acs.model.Customer;
 import ch.comem.acs.model.Status;
 import ch.comem.acs.model.Vehicle;
 import ch.comem.acs.model.VehicleType;
+import java.util.ArrayList;
 
 /**
  * Helper class to test
@@ -19,11 +20,15 @@ import ch.comem.acs.model.VehicleType;
 public class Program {
     
     public static void main(String[] args) {
-        Customer costumer = new Customer(1, "Christian");
-        VehicleType vtCar = new VehicleType("car");
-        Vehicle veh = new Vehicle("abcVin", vtCar, "Passat", 2300.00);
-        Status status = new Status("created");
-        Status stat2 = new Status("refused");
+        
+        ArrayList<VehicleType> a =  ControllerACS.getVehicleType();
+         
+         System.out.println("a = " + a);
+//        Customer costumer = new Customer(1, "Christian");
+//        VehicleType vtCar = new VehicleType("car");
+//        Vehicle veh = new Vehicle("abcVin", vtCar, "Passat", 2300.00);
+//        Status status = new Status("created");
+//        Status stat2 = new Status("refused");
         
 //        
 //        Certificate c = new Certificate(costumer, veh, status, "No comment.");

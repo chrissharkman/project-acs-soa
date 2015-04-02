@@ -5,7 +5,7 @@
  */
 package ch.comem.ws;
 
-import ch.comem.acs.model.VehicleType;
+import ch.comem.sac.model.VehicleType;
 import ch.comem.controller.SACController;
 import ch.comem.sac.model.Customer;
 import ch.comem.sac.model.Issue;
@@ -25,15 +25,21 @@ import javax.jws.WebParam;
 import javax.ejb.Stateless;
 
 /**
+ * This webservice manage a systeme for an insurence vehicule and auto service
  *
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author Florent Plomb
  */
 @WebService(serviceName = "SACAdminWs")
 @Stateless()
 public class SACAdminWs {
 
-
-
+    /**
+     * issueT the issueTrans object, which will be saved via issue object in the
+     * bd
+     *
+     * @param issueT the new issueT
+     * @return tnumber of insert or -1 if insertion was not successful
+     */
     @WebMethod(operationName = "insertNewIssue")
     public int insertNewIssue(@WebParam(name = "Issue") IssueTransport issueT) {
         int issueInsert = -1;
@@ -42,6 +48,11 @@ public class SACAdminWs {
         return issueInsert;
     }
 
+    /**
+     * Get all issue in a database
+     *
+     * @return a list of customer
+     */
     @WebMethod(operationName = "getIssues")
     public List<IssueTransport> getIssues() {
 
@@ -53,6 +64,13 @@ public class SACAdminWs {
         return listeIt;
     }
 
+    /**
+     * Get issue specifique in database
+     *
+     * @param idissue id of specific issue
+     * @return an issue transport
+     */
+
     @WebMethod(operationName = "getIssue")
     public IssueTransport getIssue(@WebParam(name = "issueId") int idissue) {
 
@@ -62,6 +80,12 @@ public class SACAdminWs {
         it = Convertisseurs.issueToIssueTransport(i);
         return it;
     }
+
+    /**
+     * Get all customers in BD
+     *
+     * @return an list of customer
+     */
 
     @WebMethod(operationName = "getCustomers")
     public List<CustomerTransport> getCustomers() {
@@ -75,6 +99,13 @@ public class SACAdminWs {
         return listUt;
     }
 
+    /**
+     * Get customer specific
+     *
+     * @param idiustomer id of customer specific
+     * @return a customerTransport
+     */
+
     @WebMethod(operationName = "getCustomer")
     public CustomerTransport getCustomer(@WebParam(name = "iustomerId") int idiustomer) {
 
@@ -84,6 +115,12 @@ public class SACAdminWs {
         return it;
     }
 
+    /**
+     * get a speicifc vehicle
+     *
+     * @param idvehicule id of speicif vehicle
+     * @return a vehicleTransport
+     */
     @WebMethod(operationName = "getVehicle")
 
     public VehicleTransport getVehicle(@WebParam(name = "idVehicule") String idvehicule) {
@@ -94,6 +131,11 @@ public class SACAdminWs {
         return it;
     }
 
+    /**
+     * Get all vehicle of database
+     *
+     * @return a list of vehicle
+     */
     @WebMethod(operationName = "getVehicles")
     public List<VehicleTransport> getVehicles() {
 
@@ -106,6 +148,13 @@ public class SACAdminWs {
         return listUt;
     }
 
+    /**
+     * Insert a new customer in DB
+     *
+     * @param customerT the new customer
+     * @return int of insert or -1 if not sucessfull
+     */
+
     @WebMethod(operationName = "insertNewCustomer")
     public int insertNewCustomer(@WebParam(name = "Customer") CustomerTransport customerT) {
         int customerInsert = -1;
@@ -114,6 +163,12 @@ public class SACAdminWs {
         return customerInsert;
     }
 
+    /**
+     * get type og vehicle in DB
+     *
+     * @param category a category
+     * @return a vehiculeType
+     */
     @WebMethod(operationName = "getvehicleType")
 
     public VehicleTypeTransport getvehicleType(@WebParam(name = "idVehicule") String category) {
@@ -123,6 +178,13 @@ public class SACAdminWs {
         it = Convertisseurs.vehicleTypeToVehicleTypeTransport(i);
         return it;
     }
+
+    /**
+     * Get a specific status in DB
+     *
+     * @param mode the mode
+     * @return a statusTransport
+     */
 
     @WebMethod(operationName = "getStatus")
 
@@ -134,6 +196,12 @@ public class SACAdminWs {
         return it;
     }
 
+    /**
+     * insert a new vehicle type
+     *
+     * @param vt a new vechicletypeTransport
+     * @return number of insert or -1 if insert not sucessfull
+     */
     @WebMethod(operationName = "insertNewVehicleType")
     public int insertNewVehicleType(@WebParam(name = "VehicleType") VehicleTypeTransport vt) {
         int vehicleTypeInsert = -1;
@@ -142,6 +210,13 @@ public class SACAdminWs {
         return vehicleTypeInsert;
     }
 
+    /**
+     * insert a new vehicle
+     *
+     * @param vt a new vehicle transport
+     * @return number of insert or -1 if insert not sucessfull
+     */
+
     @WebMethod(operationName = "insertNewVehicle")
     public int insertNewVehicle(@WebParam(name = "Vehicle") VehicleTransport vt) {
         int vehicleInsert = -1;
@@ -149,6 +224,14 @@ public class SACAdminWs {
         vehicleInsert = SACController.insertVehicle(vehicle);
         return vehicleInsert;
     }
+
+    /**
+     * Update a numberplate of an issue
+     *
+     * @param issueId id of issue updated
+     * @param numberPlate the numbeplate
+     * @return issue updated
+     */
 
     @WebMethod(operationName = "updatePlateIssue")
     public IssueTransport updatePlateIssue(@WebParam(name = "issueId") int issueId, @WebParam(name = "numberPlate") String numberPlate) {
@@ -159,6 +242,14 @@ public class SACAdminWs {
         return it;
     }
 
+    /**
+     * Update a status of issue
+     *
+     * @param issueId issue updated
+     * @param status new status
+     * @return issuetransport updated
+     */
+
     @WebMethod(operationName = "updateStatusIssue")
     public IssueTransport updateStatusIssue(@WebParam(name = "issueId") int issueId, @WebParam(name = "status") String status) {
         Issue i = null;
@@ -167,6 +258,14 @@ public class SACAdminWs {
         it = Convertisseurs.issueToIssueTransport(i);
         return it;
     }
+
+    /**
+     * issue handout updated
+     *
+     * @param issueId a issue updated
+     * @param handout a new handout
+     * @return issuetransport update
+     */
 
     @WebMethod(operationName = "handOutDateIssue")
     public IssueTransport handOutDateIssue(@WebParam(name = "issueId") int issueId, @WebParam(name = "handout") String handout) {
@@ -177,6 +276,13 @@ public class SACAdminWs {
         return it;
     }
 
+    /**
+     * update close date of issue
+     *
+     * @param issueId issue to update
+     * @param closeDate a new closedate
+     * @return issuetransport updated
+     */
     @WebMethod(operationName = "closedDateIssue")
     public IssueTransport closedDateIssue(@WebParam(name = "issueId") int issueId, @WebParam(name = "closeDate") String closeDate) {
         Issue i = null;

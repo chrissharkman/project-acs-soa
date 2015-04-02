@@ -5,7 +5,7 @@
  */
 package ch.comem.transport;
 
-import ch.comem.acs.model.VehicleType;
+import ch.comem.sac.model.VehicleType;
 import ch.comem.sac.model.Customer;
 import ch.comem.sac.model.Issue;
 import ch.comem.sac.model.Status;

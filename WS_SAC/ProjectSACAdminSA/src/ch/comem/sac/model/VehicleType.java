@@ -1,10 +1,10 @@
 
-package ch.comem.acs.model;
+package ch.comem.sac.model;
 
 /**
  * This class describes a vehicle type object, which has a category name that
  * describes the type.
- * @author christian heimann
+ * @author Plomb Florent
  */
 public class VehicleType {
     private String category;

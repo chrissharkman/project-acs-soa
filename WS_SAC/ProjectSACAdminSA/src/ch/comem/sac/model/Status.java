@@ -6,7 +6,7 @@
 package ch.comem.sac.model;
 
 /**
- * 
+ * @author florent plomb
  * This class manage the status which has a mode name.
  */
 
@@ -23,7 +23,7 @@ public class Status {
         this.mode = mode;
     }
     /**
-     * Getter of the status' mode.
+     * Getter of the status mode.
      * @return the mode name of the status
      */
     public String getMode() {
