@@ -146,7 +146,6 @@ public class ACSInsuranceWS {
      * @return a list of vehicleType
      */
     @WebMethod(operationName = "getVehicleType")
-
     public List<VehicleTypeTrans> getVehicleType() {
 
         List<VehicleTypeTrans> listVt = new ArrayList<>();

@@ -341,9 +341,15 @@ public class ControllerACS {
                 ResourceBundle prop = propertiesLoader();
                 con = getConnected(prop);
                 Statement statement = con.createStatement();
+                // avoid null pointer exception
+                String com = certificate.getComment();
+                if (com == null) {
+                    com = " ";
+                }
+                // Request construction
                 String query = "INSERT INTO certificates (customerId,vehicleIdentificationNumber,status,comment) "
                         + "VALUES (" + certificate.getCustomerId() + ",'" + certificate.getVehicleVin() + "','"
-                        + certificate.getStatus() + "','" + certificate.getComment() + "')";
+                        + certificate.getStatus() + "','" + com + "')";
                 statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
                 ResultSet res = statement.getGeneratedKeys();
                 if (res.next()) {

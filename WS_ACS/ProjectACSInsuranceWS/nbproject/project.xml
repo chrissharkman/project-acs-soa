@@ -8,7 +8,6 @@
         <data xmlns="http://www.netbeans.org/ns/j2ee-ejbjarproject/3">
             <name>ProjectACSInsuranceWS</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
-            <included-library dirs="200">file.reference.dist-lib</included-library>
             <included-library dirs="200">file.reference.ProjectACSInsuranceSA.jar</included-library>
             <source-roots>
                 <root id="src.dir"/>
