@@ -794,6 +794,7 @@ exists or setup the property manually. For example like this:
     </target>
     <target depends="compile,-library-inclusion-in-archive-weblogic,-library-inclusion-in-archive-by-user" name="library-inclusion-in-archive"/>
     <target if="is.jars.in.ejbjar" name="-library-inclusion-in-archive-by-user">
+<<<<<<< HEAD
         <copyfiles files="${file.reference.ProjectSACAdminSA.jar}" todir="${build.classes.dir}"/>
         <copyfiles files="${file.reference.dist-lib}" todir="${build.classes.dir}"/>
     </target>
@@ -809,6 +810,19 @@ exists or setup the property manually. For example like this:
     <target depends="compile" name="library-inclusion-in-manifest">
         <copyfiles files="${file.reference.ProjectSACAdminSA.jar}" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.dist-lib}" todir="${dist.ear.dir}/lib"/>
+=======
+        <copyfiles files="${libs.Che_SAC_SA.classpath}" todir="${build.classes.dir}"/>
+    </target>
+    <target if="is.server.weblogic" name="-library-inclusion-in-archive-weblogic">
+        <basename file="${libs.Che_SAC_SA.classpath}" property="manifest.libs.Che_SAC_SA.classpath"/>
+        <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
+            <attribute name="Extension-List" value="jar-1 "/>
+            <attribute name="jar-1-Extension-Name" value="${manifest.libs.Che_SAC_SA.classpath}"/>
+        </manifest>
+    </target>
+    <target depends="compile" name="library-inclusion-in-manifest">
+        <copyfiles files="${libs.Che_SAC_SA.classpath}" todir="${dist.ear.dir}/lib"/>
+>>>>>>> 659a4b1a4b37a804af9842bb0431e994a185935e
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
     <target name="-copy-meta-inf">

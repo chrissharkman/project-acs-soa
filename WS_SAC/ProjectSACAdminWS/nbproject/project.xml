@@ -8,8 +8,12 @@
         <data xmlns="http://www.netbeans.org/ns/j2ee-ejbjarproject/3">
             <name>ProjectSACAdminWS</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
+<<<<<<< HEAD
             <included-library dirs="200">file.reference.ProjectSACAdminSA.jar</included-library>
             <included-library dirs="200">file.reference.dist-lib</included-library>
+=======
+            <included-library dirs="200">libs.Che_SAC_SA.classpath</included-library>
+>>>>>>> 659a4b1a4b37a804af9842bb0431e994a185935e
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>
